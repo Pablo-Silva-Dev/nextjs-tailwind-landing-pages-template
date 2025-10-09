@@ -1,7 +1,6 @@
-'use client';
+"use client";
 
 import Image from "next/image";
-import React from "react";
 
 interface ImageCardProps {
   /** URL da imagem a ser exibida. */
@@ -53,9 +52,7 @@ export default function ImageCard({
 
       {/* Descrição */}
       {description && (
-        <p className="text-gray-600 dark:text-gray-200 text-xs sm:text-sm">
-          {description}
-        </p>
+        <p className="text-foreground/70 text-xs sm:text-sm">{description}</p>
       )}
 
       {/* Botão "Ver Detalhes" */}
@@ -75,5 +72,3 @@ export default function ImageCard({
     </div>
   );
 }
-
-

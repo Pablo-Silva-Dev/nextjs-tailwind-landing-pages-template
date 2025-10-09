@@ -53,7 +53,7 @@ export default function DealRibbon({
   stickyTop,
   stickyBottom,
   className,
-}: DealRibbonProps<CProps>) {
+}: DealRibbonProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const measureRef = useRef<HTMLDivElement | null>(null);
   const [itemCount, setItemCount] = useState<number>(24); // valor inicial seguro

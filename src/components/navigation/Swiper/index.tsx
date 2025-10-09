@@ -7,11 +7,8 @@ import type { Swiper as SwiperType } from "swiper/bundle";
 import { A11y, Grid, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-//@ts-expect-error swiper styles
 import "swiper/css";
-//@ts-expect-error swiper styles
 import "swiper/css/grid";
-//@ts-expect-error swiper styles
 import "swiper/css/navigation";
 
 export type CarouselBreakpoint = {

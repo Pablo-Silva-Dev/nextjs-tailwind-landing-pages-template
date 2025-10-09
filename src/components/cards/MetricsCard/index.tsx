@@ -36,7 +36,7 @@ export default function MetricsCard({
         className="text-2xl sm:text-3xl font-bold"
         separator="."
       />
-      <h3 className="text-md sm:text-lg font-regular">{title}</h3>
+      <h3 className="text-sm sm:text-base font-regular my-4 text-center">{title}</h3>
       <div className="mb-4 text-2xl">{icon}</div>
     </div>
   );

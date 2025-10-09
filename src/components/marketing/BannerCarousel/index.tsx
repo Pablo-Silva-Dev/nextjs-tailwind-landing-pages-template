@@ -9,13 +9,9 @@ import React, { useMemo, useRef, useState } from "react";
 import { A11y, Autoplay, Grid, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-//@ts-expect-error swiper styles
 import "swiper/css";
-//@ts-expect-error swiper styles
 import "swiper/css/grid";
-//@ts-expect-error swiper styles
 import "swiper/css/navigation";
-//@ts-expect-error swiper styles
 import "swiper/css/pagination";
 
 export type BannerBreakpoint = {
