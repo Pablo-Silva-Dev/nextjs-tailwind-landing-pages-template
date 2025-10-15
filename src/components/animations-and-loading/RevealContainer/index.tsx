@@ -11,6 +11,8 @@ interface RevealContainerProps {
   once?: boolean;
   /** Offset da animação em relação à posição original. */
   offSet?: number;
+  // /** Delay da animação em segundos */
+  delay?: number;
   // /** Classes adicionais para customização do container */
   className?: string;
 }
@@ -21,7 +23,8 @@ export default function RevealContainer({
   visibilityAmount = 0.25,
   once = false,
   offSet = 80,
-  className
+  delay = 0,
+  className,
 }: RevealContainerProps) {
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -36,12 +39,10 @@ export default function RevealContainer({
           ? { opacity: 1, transform: "translateY(0)" }
           : { opacity: 0, transform: `translateY(${offSet}px)` }
       }
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.8, delay: delay * 0.1 }}
       className={className}
     >
       {children}
     </motion.div>
   );
 }
-
-
