@@ -12,7 +12,7 @@ type WrapperTag =
   | "span"
   | "div";
 
-export interface TextFadeProps {
+export interface FadeTextProps {
   items: string[]; // texts to rotate
   intervalMs?: number; // total time each item stays on screen (default 5000)
   fadeMs?: number; // duration of fade in/out (default 600)
@@ -22,7 +22,7 @@ export interface TextFadeProps {
   loop?: boolean; // if false, stops on the last item (default true)
 }
 
-export function TextFade({
+export function FadeText({
   items,
   intervalMs = 5000,
   fadeMs = 600,
@@ -30,7 +30,7 @@ export function TextFade({
   className,
   startIndex = 0,
   loop = true,
-}: TextFadeProps) {
+}: FadeTextProps) {
   const texts = useMemo(() => items.filter(Boolean), [items]);
   const [index, setIndex] = useState(() =>
     texts.length ? Math.min(Math.max(startIndex, 0), texts.length - 1) : 0

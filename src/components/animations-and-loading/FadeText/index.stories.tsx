@@ -1,12 +1,12 @@
 // index.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { TextFade } from "./index";
+import { FadeText } from "./index";
 
-type Story = StoryObj<typeof TextFade>;
+type Story = StoryObj<typeof FadeText>;
 
-const meta: Meta<typeof TextFade> = {
-  title: "Animations and Loading/TextFade",
-  component: TextFade,
+const meta: Meta<typeof FadeText> = {
+  title: "Animations and Loading/FadeText",
+  component: FadeText,
   tags: ["autodocs"],
   parameters: {
     layout: "padded",
@@ -95,7 +95,7 @@ export const FraseInline: Story = {
   render: (args) => (
     <p className="text-base sm:text-lg text-foreground">
       Nossa plataforma é{" "}
-      <TextFade
+      <FadeText
         {...args}
         wrapper="span"
         className="font-semibold underline decoration-primary-500"
