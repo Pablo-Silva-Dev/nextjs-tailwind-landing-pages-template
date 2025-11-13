@@ -1,7 +1,7 @@
 import CircularText from "@/components/animations-and-loading/CircularText";
 import SplittedText from "@/components/animations-and-loading/SplittedText";
 import UpFadeText from "@/components/animations-and-loading/UpFadeText";
-import FireParticlesHeroSection from "@/components/elements/LandingHeader/FireParticlesHeroSection";
+import FireParticlesHeroSection from "@/components/elements/FireParticlesHeroSection";
 
 export default function Home() {
   return (
