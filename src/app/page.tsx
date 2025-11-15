@@ -1,4 +1,5 @@
 "use client";
+import CartCard from "@/components/cards/CartCard";
 import EcommerceHeader from "@/components/elements/EcommerceHeader";
 import StarsParticlesHeroSection from "@/components/elements/StarsParticlesHeroSection";
 import GenericProductDetails from "@/components/miscellaneous/GenericProductDetails";
@@ -49,6 +50,7 @@ export default function Home() {
           products={mockedProducts}
         />
         <GenericProductDetails product={mockedProductDetails[0]} />
+        <CartCard products={mockedProducts} />
       </main>
     </div>
   );

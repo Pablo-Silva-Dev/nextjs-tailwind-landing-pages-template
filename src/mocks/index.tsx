@@ -839,7 +839,7 @@ export const samplePhotos: PhotoVisualizerProps["photos"] = [
 export const mockedProducts: Product[] = [
   {
     id: "1",
-    name: "Produto A",
+    name: "Produto A Lorem ipsum is simply dummy text of the printing and typesetting industry.",
     price: 29.99,
     quantity: 1,
     imageUrl:
