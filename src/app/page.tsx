@@ -1,7 +1,7 @@
 "use client";
 import EcommerceHeader from "@/components/elements/EcommerceHeader";
 import StarsParticlesHeroSection from "@/components/elements/StarsParticlesHeroSection";
-import GenericProductDetails from "@/components/media/GenericProductDetails";
+import GenericProductDetails from "@/components/miscellaneous/GenericProductDetails";
 import Cart from "@/components/navigation/Cart";
 import useTheme from "@/hooks/useTheme";
 import { mockedProductDetails, mockedProducts } from "@/mocks";
