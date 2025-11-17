@@ -1,11 +1,11 @@
-import type{ Meta, StoryObj } from "@storybook/react-vite";
-import NavigationCard from ".";
+import type { Meta, StoryObj } from "@storybook/react";
+import InfoLinkCard from ".";
 
 const meta = {
-  title: "Cards/NavigationCard",
-  component: NavigationCard,
+  title: "Cards/InfoLinkCard",
+  component: InfoLinkCard,
   tags: ["autodocs"],
-} satisfies Meta<typeof NavigationCard>;
+} satisfies Meta<typeof InfoLinkCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -16,7 +16,7 @@ export const Default: Story = {
     text: "Entre em contato com o suporte. Estamos disponíveis 7 dias por semana, 24 horas por dia.",
     url: "#",
   },
-  parameters:{
-    layout: "centered"
-  }
+  parameters: {
+    layout: "centered",
+  },
 };

@@ -1,44 +1,60 @@
-'use client';
+"use client";
+import clsx from "clsx";
 
-import { sizes } from "@/theme/theme";
-import { getThemeColor } from "@/utils/colors";
-import { ArrowRightIcon } from "@phosphor-icons/react";
-
-interface NavigationCardProps {
-  /** URL para onde o card deve navegar */
-  url: string;
-  /** Título do card */
-  title: string;
-  /** Texto descritivo do card */
-  text: string;
+export interface NavigationCardProps {
+  onAdvance: () => void;
+  onBack: () => void;
+  advanceLabel?: string;
+  backLabel?: string;
+  advanceIcon?: React.ReactNode;
+  backIcon?: React.ReactNode;
+  advanceDisabled?: boolean;
+  backDisabled?: boolean;
+  className?: string;
+  advanceButtonClassName?: string;
+  backButtonClassName?: string;
 }
 
-/**Card utilizado para realizar navegação entre páginas*/
 export default function NavigationCard({
-  url,
-  title,
-  text,
+  onAdvance,
+  onBack,
+  advanceLabel,
+  backLabel,
+  advanceIcon,
+  backIcon,
+  advanceDisabled,
+  backDisabled,
+  className,
+  advanceButtonClassName,
+  backButtonClassName,
 }: NavigationCardProps) {
-  const primaryColor = getThemeColor("--color-primary-500");
-
   return (
-    <a
-      className="flex w-full items-center justify-between p-3 sm:p-4 gap-8 rounded-md border border-foreground shadow-md cursor-pointer"
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Navegar para ${title}`}
+    <div
+      className={clsx(
+        "w-full flex justify-between p-4 rounded-md border border-border-card bg-bg-card shadow-sm",
+        className
+      )}
     >
-      <div className="flex-1">
-        <h3 className="text-md sm:text-lg font-semibold text-foreground break-words">{title}</h3>
-        <p className="text-xs sm:text-sm text-muted-foreground text-foreground">{text}</p>
-      </div>
-      {/* Icon for small devices */}
-      <ArrowRightIcon color={primaryColor} size={sizes.large} weight="bold" className="hidden sm:flex" />
-      {/* Icon for medium and large devices */}
-      <ArrowRightIcon color={primaryColor} size={sizes.medium} weight="bold" className="sm:hidden" />
-    </a>
+      <button
+        onClick={onBack}
+        disabled={backDisabled}
+        className={clsx(
+          "flex items-center gap-2  px-4 py-2 bg-transparent text-foreground text-xs sm:text-sm rounded border border-foreground",
+          backButtonClassName
+        )}
+      >
+        {backIcon} {backLabel ?? "Voltar"}
+      </button>
+      <button
+        onClick={onAdvance}
+        disabled={advanceDisabled}
+        className={clsx(
+          "flex items-center gap-2 px-4 py-2 bg-primary-500 text-white text-xs sm:text-sm rounded disabled:cursor-not-allowed disabled:opacity-60",
+          advanceButtonClassName
+        )}
+      >
+        {advanceIcon} {advanceLabel ?? "Continuar"}
+      </button>
+    </div>
   );
 }
-
-
