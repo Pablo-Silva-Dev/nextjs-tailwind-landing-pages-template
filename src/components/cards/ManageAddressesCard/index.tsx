@@ -169,7 +169,7 @@ export default function ManageAddressesCard({
                 "rounded-lg border p-4 cursor-pointer",
                 "bg-background",
                 isSelected
-                  ? "border-primary-500 shadow-[0_0_0_1px_rgba(0,151,57,0.2)]"
+                  ? "border-primary-500 "
                   : "border-border-card "
               )}
             >

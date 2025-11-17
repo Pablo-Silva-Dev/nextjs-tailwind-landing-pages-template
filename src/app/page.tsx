@@ -1,13 +1,10 @@
 "use client";
-import CartCard from "@/components/cards/CartCard";
-import FavoriteItemCard from "@/components/cards/FavoriteItemCard";
-import OrderSummaryCard from "@/components/cards/OrderSummaryCard";
+import DeliveryOptionsCard from "@/components/cards/DeliveryOptionsCard";
 import EcommerceHeader from "@/components/elements/EcommerceHeader";
 import StarsParticlesHeroSection from "@/components/elements/StarsParticlesHeroSection";
-import GenericProductDetails from "@/components/miscellaneous/GenericProductDetails";
 import Cart from "@/components/navigation/Cart";
 import useTheme from "@/hooks/useTheme";
-import { mockedProductDetails, mockedProducts } from "@/mocks";
+import { mockedAddresses, mockedProducts } from "@/mocks";
 import { useState } from "react";
 
 export default function Home() {
@@ -51,19 +48,23 @@ export default function Home() {
           isOpen={openCart}
           products={mockedProducts}
         />
-        <GenericProductDetails product={mockedProductDetails[0]} />
-        <div className="p-6 flex flex-col gap-6">
-          <CartCard products={mockedProducts} />
-          <OrderSummaryCard
-            items={mockedProducts}
-            onCheckout={() => console.log("checkout")}
-          />
-          <FavoriteItemCard
-            product={mockedProducts[0]}
-            onRemoveItem={() => console.log("Item removed from favorites")}
-            onShareItem={(url) => console.log("Share URL:", url)}
-          />
-        </div>
+        <DeliveryOptionsCard
+          address={mockedAddresses[0]}
+          options={[
+            {
+              id: "1",
+              label: "Mototáxi",
+              deliveryEstimate: "30-40 minutos",
+              price: 9.99,
+            },
+            {
+              id: "2",
+              label: "Retirar na loja",
+              deliveryEstimate: "Diponível em até 1 hora",
+              price: 0,
+            },
+          ]}
+        />
       </main>
     </div>
   );
