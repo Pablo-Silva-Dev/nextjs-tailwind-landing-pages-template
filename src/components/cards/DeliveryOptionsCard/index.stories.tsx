@@ -1,10 +1,7 @@
 // components/checkout/DeliveryOptionsCardWithAddress/index.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
-import DeliveryOptionsCard, {
-  type Option,
-  type Address,
-} from "./index";
+import { useState } from "react";
+import DeliveryOptionsCard, { type Address, type Option } from "./index";
 
 const SAMPLE_ADDRESS: Address = {
   id: "addr1",
@@ -20,10 +17,30 @@ const SAMPLE_ADDRESS: Address = {
 };
 
 const SAMPLE_OPTIONS: Option[] = [
-  { id: "std", label: "Econômica", deliveryEstimate: "5–8 dias úteis", price: 12.9 },
-  { id: "exp", label: "Expressa", deliveryEstimate: "2–3 dias úteis", price: 29.9 },
-  { id: "sam", label: "Mesmo dia (capitais)", deliveryEstimate: "Hoje até 22h", price: 49.9 },
-  { id: "pick", label: "Retirada na loja", deliveryEstimate: "Imediata após confirmação", price: 0 },
+  {
+    id: "std",
+    label: "Econômica",
+    deliveryEstimate: "5–8 dias úteis",
+    price: 12.9,
+  },
+  {
+    id: "exp",
+    label: "Expressa",
+    deliveryEstimate: "2–3 dias úteis",
+    price: 29.9,
+  },
+  {
+    id: "sam",
+    label: "Mesmo dia (capitais)",
+    deliveryEstimate: "Hoje até 22h",
+    price: 49.9,
+  },
+  {
+    id: "pick",
+    label: "Retirada na loja",
+    deliveryEstimate: "Imediata após confirmação",
+    price: 0,
+  },
 ];
 
 const meta: Meta<typeof DeliveryOptionsCard> = {
@@ -35,19 +52,29 @@ const meta: Meta<typeof DeliveryOptionsCard> = {
     docs: {
       description: {
         component:
-          "Cartão para **selecionar o tipo de entrega** mostrando o **endereço** escolhido. Suporta controle interno (não controlado) e externo via `selectedOptionId` (controlado).",
+          "Cartão para **selecionar o tipo de entrega** mostrando o **endereço** escolhido. Suporta controle interno (não controlado) e externo via `selectedOption` + `onSelectOption` (controlado).",
       },
     },
   },
   argTypes: {
     options: { control: "object", description: "Lista de opções de entrega." },
-    address: { control: "object", description: "Endereço de entrega exibido no topo." },
-    selectedOptionId: {
-      control: "text",
-      description: "ID da opção selecionada (modo controlado).",
+    address: {
+      control: "object",
+      description: "Endereço de entrega exibido no topo.",
     },
-    onSelectOption: { action: "onSelectOption", description: "Dispara ao selecionar uma opção." },
-    onBack: { action: "onBack", description: "Dispara ao clicar em 'Alterar' endereço." },
+    selectedOption: {
+      control: "object",
+      description:
+        "Objeto completo da opção selecionada. Combine com `onSelectOption` para modo controlado.",
+    },
+    onSelectOption: {
+      action: "onSelectOption",
+      description: "Dispara ao selecionar uma opção.",
+    },
+    onBack: {
+      action: "onBack",
+      description: "Dispara ao clicar em 'Alterar' endereço.",
+    },
     className: { control: "text" },
   },
   decorators: [
@@ -75,13 +102,13 @@ export const WithPreselectedOption: Story = {
   args: {
     options: SAMPLE_OPTIONS,
     address: SAMPLE_ADDRESS,
-    selectedOptionId: "exp",
+    selectedOption: SAMPLE_OPTIONS[1],
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Exemplo **controlado** com `selectedOptionId` definido para **Expressa**.",
+          "Exemplo com **Expressa** pré-selecionada via prop `selectedOption`.",
       },
     },
   },
@@ -90,12 +117,16 @@ export const WithPreselectedOption: Story = {
 export const ControlledExample: Story = {
   render: (args) => {
     const Controlled = () => {
-      const [selected, setSelected] = useState<string | undefined>("std");
+      const [selectedId, setSelectedId] = useState<string>("std");
+      const options = args.options ?? SAMPLE_OPTIONS;
+      const selectedOption =
+        options.find((opt) => opt.id === selectedId) ?? options[0];
       return (
         <DeliveryOptionsCard
           {...args}
-          selectedOptionId={selected}
-          onSelectOption={(id) => setSelected(id)}
+          options={options}
+          selectedOption={selectedOption ?? undefined}
+          onSelectOption={(id) => setSelectedId(id)}
           onBack={() => alert("Trocar endereço")}
         />
       );
@@ -119,7 +150,12 @@ export const ControlledExample: Story = {
 export const PickupOnly: Story = {
   args: {
     options: [
-      { id: "pick", label: "Retirada na loja", deliveryEstimate: "Imediata após confirmação", price: 0 },
+      {
+        id: "pick",
+        label: "Retirada na loja",
+        deliveryEstimate: "Imediata após confirmação",
+        price: 0,
+      },
     ],
     address: SAMPLE_ADDRESS,
   },
@@ -132,18 +168,17 @@ export const PickupOnly: Story = {
   },
 };
 
-export const DarkModePreview: Story = {
+export const OnlyView: Story = {
   args: {
     options: SAMPLE_OPTIONS,
     address: SAMPLE_ADDRESS,
-    selectedOptionId: "sam",
+    selectedOption: SAMPLE_OPTIONS[2],
+    onlyView: true,
   },
   decorators: [
     (Story) => (
-      <div className="dark bg-black text-white min-h-[60vh] p-6">
-        <div className="mx-auto max-w-3xl">
-          <Story />
-        </div>
+      <div className="mx-auto max-w-3xl">
+        <Story />
       </div>
     ),
   ],

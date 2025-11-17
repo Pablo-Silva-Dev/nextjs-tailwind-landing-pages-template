@@ -54,7 +54,7 @@ export default function CartCard({
   return (
     <div className="flex flex-col bg-bg-card border border-bg-card shadow-sm text-foreground/70 p-4 rounded-md">
       <span className="mb-4 text-foreground">Seu carrinho</span>
-      <div className="flex flex-col text-foreground/70 sm:pr-1 max-h-[50vh] overflow-y-auto">
+      <div className="flex flex-col text-foreground/70 sm:pr-1 max-h-[40vh] overflow-y-auto">
         {uniqueCartCardItems.length > 0 ? (
           uniqueCartCardItems.map((product) => (
             <CartCardItem

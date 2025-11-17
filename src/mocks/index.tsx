@@ -931,7 +931,7 @@ export const mockedDeliveryOptions = [
   },
 ];
 
-export const mockedAddresses : Address[] = [
+export const mockedAddresses: Address[] = [
   {
     id: "1",
     label: "Casa",
@@ -953,5 +953,5 @@ export const mockedAddresses : Address[] = [
     state: "RJ",
     zipCode: "76543-210",
     country: "Brasil",
-  }
-]
+  },
+];

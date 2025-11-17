@@ -1,10 +1,16 @@
 "use client";
+import CartCard from "@/components/cards/CartCard";
 import DeliveryOptionsCard from "@/components/cards/DeliveryOptionsCard";
+import OrderSummaryCard from "@/components/cards/OrderSummaryCard";
 import EcommerceHeader from "@/components/elements/EcommerceHeader";
 import StarsParticlesHeroSection from "@/components/elements/StarsParticlesHeroSection";
 import Cart from "@/components/navigation/Cart";
 import useTheme from "@/hooks/useTheme";
-import { mockedAddresses, mockedProducts } from "@/mocks";
+import {
+  mockedAddresses,
+  mockedDeliveryOptions,
+  mockedProducts,
+} from "@/mocks";
 import { useState } from "react";
 
 export default function Home() {
@@ -48,23 +54,20 @@ export default function Home() {
           isOpen={openCart}
           products={mockedProducts}
         />
-        <DeliveryOptionsCard
-          address={mockedAddresses[0]}
-          options={[
-            {
-              id: "1",
-              label: "Mototáxi",
-              deliveryEstimate: "30-40 minutos",
-              price: 9.99,
-            },
-            {
-              id: "2",
-              label: "Retirar na loja",
-              deliveryEstimate: "Diponível em até 1 hora",
-              price: 0,
-            },
-          ]}
-        />
+        <div className="p-6 flex flex-col gap-6">
+          <CartCard products={mockedProducts} />
+          <OrderSummaryCard
+            items={mockedProducts}
+            showCheckoutButton={false}
+            deliveryCost={9.99}
+          />
+          <DeliveryOptionsCard
+            onlyView={true}
+            address={mockedAddresses[0]}
+            options={mockedDeliveryOptions}
+            selectedOption={mockedDeliveryOptions[0]}
+          />
+        </div>
       </main>
     </div>
   );

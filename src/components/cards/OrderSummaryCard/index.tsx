@@ -1,7 +1,8 @@
 "use client";
 
-import clsx from "clsx";
 import { formatBRL } from "@/utils/format";
+import clsx from "clsx";
+import { useMemo } from "react";
 
 export interface OrderSummaryItem {
   id: string;
@@ -16,6 +17,8 @@ interface OrderSummaryCardProps {
   helperText?: string;
   checkoutLabel?: string;
   onCheckout?: () => void;
+  showCheckoutButton?: boolean;
+  deliveryCost?: number;
   className?: string;
 }
 
@@ -25,15 +28,19 @@ const columnsClass =
 export default function OrderSummaryCard({
   items,
   title = "Resumo do pedido",
-  helperText = "Frete e impostos serão calculados na finalização.",
+  helperText,
   checkoutLabel = "Prosseguir para o checkout",
   onCheckout,
+  showCheckoutButton = true,
+  deliveryCost = 0,
   className,
 }: OrderSummaryCardProps) {
-  const total = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const total = useMemo(() => {
+    return (
+      items.reduce((acc, item) => acc + item.price * item.quantity, 0) +
+      (deliveryCost ?? 0)
+    );
+  }, [items, deliveryCost]);
 
   return (
     <section
@@ -58,7 +65,7 @@ export default function OrderSummaryCard({
             <span className="text-center">Qtd.</span>
             <span className="text-right">Subtotal</span>
           </div>
-          <div className="divide-y divide-foreground/10 border-y border-foreground/10">
+          <div className="divide-y divide-foreground/10 border-y border-foreground/10 max-h-[40vh] overflow-y-auto pr-3">
             {items.map((item) => {
               const subtotal = item.price * item.quantity;
               return (
@@ -88,6 +95,14 @@ export default function OrderSummaryCard({
               );
             })}
           </div>
+            <div className="flex flex-1 justify-between py-3">
+              <span className="text-sm sm:text-base font-semibold text-right">
+                Frete
+              </span>
+              <span className="text-sm sm:text-base font-semibold text-right">
+                {formatBRL(deliveryCost)}
+              </span>
+            </div>
         </>
       ) : (
         <div className="rounded-lg border border-dashed border-foreground/20 bg-background/40 p-4 text-sm text-foreground/70">
@@ -95,26 +110,27 @@ export default function OrderSummaryCard({
         </div>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-foreground/10 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="text-base font-semibold">Total</span>
         <span className="text-lg sm:text-xl font-bold text-primary-600 dark:text-primary-400">
           {formatBRL(total)}
         </span>
       </div>
 
-      <button
-        type="button"
-        onClick={onCheckout}
-        disabled={!items.length}
-        className={clsx(
-          "inline-flex w-full items-center justify-center rounded-md px-5 py-3 text-sm font-semibold text-white  focus-visible:outline-offset-2 focus-visible:outline-primary-500",
-          "bg-primary-500",
-          "disabled:cursor-not-allowed disabled:opacity-50"
-        )}
-      >
-        {checkoutLabel}
-      </button>
+      {showCheckoutButton && (
+        <button
+          type="button"
+          onClick={onCheckout}
+          disabled={!items.length}
+          className={clsx(
+            "inline-flex w-full items-center justify-center rounded-md px-5 py-3 text-sm font-semibold text-white  focus-visible:outline-offset-2 focus-visible:outline-primary-500",
+            "bg-primary-500",
+            "disabled:cursor-not-allowed disabled:opacity-50"
+          )}
+        >
+          {checkoutLabel}
+        </button>
+      )}
     </section>
   );
 }
-
