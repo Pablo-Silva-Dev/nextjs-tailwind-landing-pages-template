@@ -44,7 +44,7 @@ const SAMPLE_OPTIONS: Option[] = [
 ];
 
 const meta: Meta<typeof DeliveryOptionsCard> = {
-  title: "E-commerce/Checkout/DeliveryOptionsCard (with Address)",
+  title: "Cards/DeliveryOptionsCard",
   component: DeliveryOptionsCard,
   tags: ["autodocs"],
   parameters: {

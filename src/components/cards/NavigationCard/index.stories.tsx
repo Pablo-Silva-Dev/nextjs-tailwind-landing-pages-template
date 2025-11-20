@@ -9,7 +9,7 @@ import { useState } from "react";
 import NavigationCard from "./index";
 
 const meta: Meta<typeof NavigationCard> = {
-  title: "Forms/Navigation/NavigationCard",
+  title: "Cards/NavigationCard",
   component: NavigationCard,
   tags: ["autodocs"],
   parameters: {
