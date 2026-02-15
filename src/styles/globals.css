@@ -146,3 +146,30 @@ button:disabled{
   .rc-slider-disabled { background-color: var(--color-background) !important;}
 }
 
+.video-section-player,
+.video-section-player > *,
+.video-section-player > * > *,
+.video-section-player video,
+.video-section-player iframe,
+.video-section-player hls-video,
+.video-section-player dash-video,
+.video-section-player mux-player,
+.video-section-player youtube-video,
+.video-section-player vimeo-video,
+.video-section-player wistia-video,
+.video-section-player twitch-video,
+.video-section-player tiktok-video {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  display: block !important;
+}
+
+.video-section-player video,
+.video-section-player iframe {
+  object-fit: cover !important;
+  object-position: center center !important;
+}
